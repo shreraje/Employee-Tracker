@@ -61,6 +61,7 @@ function optionMenu() {
     });
 };
 
+// Function to add Department name
 function addDepartment() {
     inquirer.prompt({
         name: "department",
@@ -71,6 +72,28 @@ function addDepartment() {
         connection.query(query, { name: answer.department }, function (err, res) {
             if (err) throw err;
             console.log("Added your department name!")
+            optionMenu();
+        })
+    })
+}
+
+// Function to add an Employee's first and last name
+function addEmployee() {
+    inquirer.prompt([
+        {
+            name: "firstname",
+            type: "input",
+            message: "Please enter the first name of an employee!"
+        }, {
+            name: "lastname",
+            type: "input",
+            message: "Please enter the last name of an employee!"
+        }
+    ]).then(function (answer) {
+        var query = "INSERT INTO employee SET ?"
+        connection.query(query, { firstname: answer.firstname, lastname: answer.lastname }, function (err, res) {
+            if (err) throw err;
+            console.log("Added an employee!");
             optionMenu();
         })
     })
