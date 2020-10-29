@@ -28,7 +28,7 @@ function optionMenu() {
         type: "list",
         message: "Please choose what you would like to perform!",
         choices: [
-            "Add department", "Add roles", "Add an employee", "View departments", "View roles", "View employees", "Update an employee roles", "Exit"
+            "Add department", "Add an employee", "Add a role", "View departments", "View employees", "View roles", "Update an employee roles", "Exit"
         ]
     }).then(function (answer) {
         switch (answer.action) {
@@ -81,11 +81,11 @@ function addDepartment() {
 function addEmployee() {
     inquirer.prompt([
         {
-            name: "first",
+            name: "firstname",
             type: "input",
             message: "Please enter the first name of an employee!"
         }, {
-            name: "last",
+            name: "lastname",
             type: "input",
             message: "Please enter the last name of an employee!"
         }
@@ -120,3 +120,32 @@ function addRoles() {
         })
     })
 }
+
+// Function to view all departments in database
+function viewDepartment() {
+    connection.query("SELECT * FROM department", function (err, data) {
+        if (err) throw err;
+        console.log(data);
+        optionMenu();
+    })
+}
+
+// Function to view all employees in database
+function viewEmployees() {
+    connection.query("SELECT * FROM employee", function (err, data) {
+        if (err) throw err;
+        console.log(data);
+        optionMenu();
+    })
+}
+
+// Function to view all roles added in database
+function viewRoles() {
+    connection.query("SELECT * FROM role", function (err, data) {
+        if (err) throw err;
+        console.log(data);
+        optionMenu();
+    })
+}
+
+
