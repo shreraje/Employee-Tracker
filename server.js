@@ -39,17 +39,17 @@ function optionMenu() {
             case "Add an employee":
                 addEmployee();
                 break;
-            case "Add roles":
+            case "Add a role":
                 addRoles();
                 break;
             case "View departments":
                 viewDepartment();
                 break;
-            case "View roles":
-                viewRoles();
-                break;
             case "View employees":
                 viewEmployees();
+                break;
+            case "View roles":
+                viewRoles();
                 break;
             case "Update an employee roles":
                 updateEmployees();
@@ -148,4 +148,39 @@ function viewRoles() {
     })
 }
 
+//  Function to update the employee & role table
+function updateEmployees() {
+    let query = "SELECT * FROM employee"
+    connection.query(query, function (err, data) {
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name: "update",
+                type: "list",
+                message: "Which employee would you like to update?",
+                choices: data.map(data => data.id + " " + data.firstname + " " + data.lastname)
+            }
+        ]).then(employee => {
+            let employeeId = employee.id
 
+            let query = "SELECT * FROM role"
+            connection.query(query, function (err, data) {
+                if (err) throw err;
+                inquirer.prompt([
+                    {
+                        name: "update",
+                        type: "list",
+                        message: "What is an employee's new role would you like to update?",
+                        choices: data.map(data => data.id + " " + data.title)
+                    }
+                ]).then(newrole => {
+                    let role_id = newrole.id
+                    console.log(employee, newrole)
+                    connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [role_id, employeeId]);
+                    optionMenu();
+                })
+            })
+        })
+        console.log("Project works!!!")
+    })
+}
