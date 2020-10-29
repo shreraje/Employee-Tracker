@@ -32,11 +32,13 @@ To check how this application works, user will have to follow the following step
 - Node.js, MySQL and Inquirer.
 
 ## Screenshots
-Deployed App Homepage:
+Command-line Terminal Screenshot: <img width="2048" alt="Employee Tracker Command-Line Screen shot" src="https://user-images.githubusercontent.com/61192734/97633056-aff75700-19f0-11eb-8b83-b5d945c78919.png">
+
+MySQL Workbench Screenshot: <img width="2048" alt="Screenshot MySQL Workbench" src="https://user-images.githubusercontent.com/61192734/97633106-c9000800-19f0-11eb-9445-1fec11002384.png">
 
 
 ## Links
-Recorded video: 
+Recorded video: https://drive.google.com/file/d/15kC25GB-c3OsJ5onpf8p4FSKDrxkmAZW/view?usp=sharing
 
 
 GitHub Repo: https://github.com/shreraje/Employee-Tracker/
