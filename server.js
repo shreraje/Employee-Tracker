@@ -36,11 +36,11 @@ function optionMenu() {
             case "Add department":
                 addDepartment();
                 break;
-            case "Add roles":
-                addRoles();
-                break;
             case "Add an employee":
                 addEmployee();
+                break;
+            case "Add roles":
+                addRoles();
                 break;
             case "View departments":
                 viewDepartment();
@@ -81,11 +81,11 @@ function addDepartment() {
 function addEmployee() {
     inquirer.prompt([
         {
-            name: "firstname",
+            name: "first",
             type: "input",
             message: "Please enter the first name of an employee!"
         }, {
-            name: "lastname",
+            name: "last",
             type: "input",
             message: "Please enter the last name of an employee!"
         }
@@ -94,6 +94,28 @@ function addEmployee() {
         connection.query(query, { firstname: answer.firstname, lastname: answer.lastname }, function (err, res) {
             if (err) throw err;
             console.log("Added an employee!");
+            optionMenu();
+        })
+    })
+}
+
+// Function to add Roles & salaries for an employee
+function addRoles() {
+    inquirer.prompt([
+        {
+            name: "roles",
+            type: "input",
+            message: "Please enter the role you would like to add!"
+        }, {
+            name: "salary",
+            type: "input",
+            message: "Please enter the salary for this role!"
+        }
+    ]).then(function (answer) {
+        var query = "INSERT INTO role SET ?"
+        connection.query(query, { title: answer.roles, salary: answer.salary }, function (err, res) {
+            if (err) throw err;
+            console.log("Added employee's role & salary!")
             optionMenu();
         })
     })
