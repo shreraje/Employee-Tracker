@@ -60,3 +60,18 @@ function optionMenu() {
         }
     });
 };
+
+function addDepartment() {
+    inquirer.prompt({
+        name: "department",
+        type: "input",
+        message: "Please enter department name you would like to add!"
+    }).then(function (answer) {
+        var query = "INSERT INTO department SET ?"
+        connection.query(query, { name: answer.department }, function (err, res) {
+            if (err) throw err;
+            console.log("Added your department name!")
+            optionMenu();
+        })
+    })
+}
